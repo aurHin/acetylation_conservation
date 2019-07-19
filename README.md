@@ -40,10 +40,11 @@ gg6
 
 ### Prepare peak files
 
->*From_narrowPeak_to_FixAndSplitTSS_mm10.sh*
-*reformat narrow peak format to 4 columns bed format
-*get intervals that do not overlap promoters (TSS)
-# resize and merge intervals
+Script *From_narrowPeak_to_FixAndSplitTSS_mm10.sh*
+
+* reformat narrow peak format to 4 columns bed format
+* get intervals that do not overlap promoters (TSS)
+* resize and merge intervals
 # get intervals that do not overlap promoters AFTER resizing
 You can choose to give all the peaks the same size, centered on the summit called by macs2. If so, peaks may then overlap. In this case, they are merge in one, larger peak. 
 
