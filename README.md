@@ -82,3 +82,9 @@ If you have both resized and original macs2peak tracks for positive tissues and 
 >chr1	4622998	4623355	MACS2_peak_16	CSoverlap
 
 >chr1	4640279	4641967	MACS2_peak_17	noCSoverlap
+
+### Plot macs2peaks
+
+*Plot_acetylation_201907.R*
+
+Plot coverage of peaks per region [bp] normalised by region size [bp]. Peaks that OL 1 or more bp with CNS are in one color, peaks without OL in another.
