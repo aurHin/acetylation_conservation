@@ -2,6 +2,11 @@ library(data.table)
 library(ggplot2)
 library(plyr)
 
+y_limit<-0.09
+colWidth<-0.7
+pltWidth<-9 #in cm
+pltHeight<-9 #in cm
+
 fileForTesting<-"/Users/Hintermann/Desktop/LAB/ChIP/conservedSeqAndAc_mm_gg_PT_skin/B_PT_WP_Skin_CTCF/H3K27ac_mm10/macs2_toPlot/H3K27ac_WP_E125_macs2narrowPeak_noTSS_nonBrain_sub_ConservationColumns.bed"
 regionsForQuantif<-commandArgs(T)[2]
 regionsDF<-read.table(regionsForQuantif,sep="\t",stringsAsFactors=T)
@@ -51,10 +56,8 @@ tblName<-gsub(".bed","_plottedData.bed",basename(arg1))
 message("Plotting")
 
 if(length(grep("resize",pltName))>0){
-  y_limit<-0.09
   peakSize<-"resized peaks"
 }else{
-  y_limit<-0.09
   peakSize="original peaks"
   }
 
@@ -71,11 +74,10 @@ if(length(grep("noBrain150",pltName))>0){
 }
 labsTitle<-paste0("macs2 H3K27ac\n",peakSize,"\n",tissue," minus ",brainNb)
 
-plt<-ggplot(tbl_toPlot,aes(x=tbl_toPlot$xAxis,y=(tbl_toPlot$V3-tbl_toPlot$V2)/tbl_toPlot$regionLength,fill=tbl_toPlot$V4,width=0.7))+geom_bar(stat ="identity")+theme_bw()+labs(title=labsTitle, x= " ",y ="[acetylated_bp/total_bp]", fill=" ")+coord_cartesian(ylim = c(0,y_limit))
+plt<-ggplot(tbl_toPlot,aes(x=tbl_toPlot$xAxis,y=(tbl_toPlot$V3-tbl_toPlot$V2)/tbl_toPlot$regionLength,fill=tbl_toPlot$V4,width=colWidth))+geom_bar(stat ="identity")+theme_bw()+labs(title=labsTitle, x= " ",y ="[acetylated_bp/total_bp]", fill=" ")+coord_cartesian(ylim = c(0,y_limit))
 dfData<-ggplot_build(plt)$plot$data
 write.table(ggplot_build(plt)$plot$data,paste0(outdir,tblName), row.names = F,col.names = F,sep="\t",quote = F)
-#print(dfData)
-ggsave(paste0(outdir,pltName),width = 9,height=9,units="cm")
+ggsave(paste0(outdir,pltName),width = pltWidth,height=pltHeight,units="cm")
 
 message(paste0("Plot saved under: ",outdir,pltName))
 
