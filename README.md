@@ -5,7 +5,7 @@
 Start from macs2 narrowPeak files from ChIP-seq experiment and from conservation files which are bed adapted from MAF.
 Here mouse mm10 vs chicken galGal6.
 
-## Conservation files
+## Prepare conservation files
 **From MAF files to genome-wide non-coding (we are interest in enhancers) bed conservation file. (2 species max)**
 
 ### get conservation files
@@ -36,9 +36,9 @@ gg6
 
     bedtools intersect -a /Users/Hintermann/Desktop/LAB/genomicData/genomicData_galGal6/SortBed_on_MAF_to_BED_on_gG6_mm10_galGal6.bed -b /Users/Hintermann/Desktop/LAB/genomicData/genomicData_galGal6/genomeWide_ncbiRefSeq_gg6.bed -v > /Users/Hintermann/Desktop/LAB/genomicData/genomicData_galGal6/SortBed_on_MAF_to_BED_on_gG6_mm10_galGal6_nonCoding.bed 
 
-## macs2narrowPeak files
+## Preapre macs2narrowPeak files
 
-### Prepare peak files
+### Fromat peak files
 
 *From_narrowPeak_to_FixAndSplitTSS_mm10.sh*
 
@@ -52,5 +52,13 @@ Takes one input file *narrowPeak.bed*, gives two outputfiles: *noTSS.bed* ; *res
 ### Subtract negative tissue from positive one
 
 *From_noTSS_to_noBrain_mm10.sh*
-If you phave resized and original macs2 peaks tracks for positive tissues and you want to subtract negative tissue, provide negative tracks for both resized and original macs2 peaks.
 
+If you have both resized and original macs2peak tracks for positive tissues and you want to subtract negative tissue, provide negative tracks for both resized and original macs2peaks.
+
+## Analyse
+
+### Find which macs2peaks overlap with CNS
+
+*peak_OL_CNS.sh*
+
+Takes macs2peak file and return a bed with an additional column which containe "noCSoverlap" or "CSoverlap" for each peak. 1bp overlap is sufficient to qualify the whole peak as CNSoverlap.
