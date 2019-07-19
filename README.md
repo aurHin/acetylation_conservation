@@ -36,6 +36,13 @@ gg6
 
     bedtools intersect -a /Users/Hintermann/Desktop/LAB/genomicData/genomicData_galGal6/SortBed_on_MAF_to_BED_on_gG6_mm10_galGal6.bed -b /Users/Hintermann/Desktop/LAB/genomicData/genomicData_galGal6/genomeWide_ncbiRefSeq_gg6.bed -v > /Users/Hintermann/Desktop/LAB/genomicData/genomicData_galGal6/SortBed_on_MAF_to_BED_on_gG6_mm10_galGal6_nonCoding.bed 
 
+chr1	682789	682876	galGal6_52	0	+
+chr1	1116484	1116563	galGal6_63	0	+
+chr1	1161041	1161284	galGal6_74	0	+
+chr1	1233110	1233357	galGal6_111	0	+
+
+*Note: galGal_74 is the orthologuous conserved element of mm10_74.
+
 ## Preapre macs2narrowPeak files
 
 ### Fromat peak files
@@ -61,6 +68,11 @@ If you have both resized and original macs2peak tracks for positive tissues and 
 
 *peak_OL_CNS.sh*
 
-Takes macs2peak file and return a bed with an additional column which containe "noCSoverlap" or "CSoverlap" for each peak. 1bp overlap is sufficient to qualify the whole peak as CNSoverlap.
+* takes macs2peak file and creat a subset file with only peaks that OL with CNS. 1bp overlap is sufficient to qualify the whole peak as CNSoverlap.
+* passes .bed and CS.bed as argumenta in *AddConservationColumnTomacs2.R*. 
+* returns a bed with an additional column which contains "noCSoverlap" or "CSoverlap" for each peak. 
 
-*AddConservationColumnTomacs2.R*
+chr1	4598797	4599054	MACS2_peak_14	noCSoverlap
+chr1	4613913	4614257	MACS2_peak_15	noCSoverlap
+chr1	4622998	4623355	MACS2_peak_16	CSoverlap
+chr1	4640279	4641967	MACS2_peak_17	noCSoverlap
