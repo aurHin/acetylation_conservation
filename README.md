@@ -1,10 +1,11 @@
-## macs2peaks_conservation
+# macs2peaks_conservation
 
-Compare different tracks of macs2 peaks from ChIP-seq, without or without comparison with sequence conservation.
-
+**Compare different tracks of macs2 peaks from ChIP-seq, without or without comparison with sequence conservation.**
 
 Start from macs2 narrowPeak files from ChIP-seq experiment and from conservation files which are bed adapted from MAF.
 Here mouse mm10 vs chicken galGal6.
+
+## Conservation files
 
 ### Step - get conservation files
 
