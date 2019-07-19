@@ -15,4 +15,9 @@ galGal6.mm10.synNet.maf.gz - filtered net file for syntenic alignments
  
 ### Step - format conservation files
 
-To have the syntenic conserved regions, transform galGal6.mm10.synNet.maf.gz to be with galaxy tool "MAF to Interval".
+To have the syntenic conserved regions, transform galGal6.mm10.synNet.maf.gz to be with galaxy tool "MAF to BED".
+
+python '/slipstream/galaxy/production/galaxy-dist/tools/maf/maf_to_bed.py' '/slipstream/galaxy/production/data/files/090/dataset_90288.dat' '/slipstream/galaxy/production/data/files/090/dataset_90303.dat' 'galGal6,mm10' partial_allowed '.' '105592'
+
+
+sortBed -i '/slipstream/galaxy/production/data/files/090/dataset_90303.dat'  > '/slipstream/galaxy/production/data/files/090/dataset_90308.dat'
