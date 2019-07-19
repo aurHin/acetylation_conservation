@@ -49,6 +49,9 @@ Takes one input file *narrowPeak.bed*, gives two outputfiles: *noTSS.bed* ; *res
 * create new file with resized and merged intervals. *You can choose to give all the peaks the same size, centered on the summit called by macs2. If so, peaks may then overlap. In this case, they are merge in one, larger peak*
 * get intervals that do not overlap promoters AFTER resizing
   
+### Subtract negative tissue from positive one
+
+*From_noTSS_to_noBrain_mm10.sh*
 
 
 
