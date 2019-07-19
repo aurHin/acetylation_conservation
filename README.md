@@ -6,7 +6,7 @@ Start from macs2 narrowPeak files from ChIP-seq experiment and from conservation
 Here mouse mm10 vs chicken galGal6.
 
 ## Conservation files
-**From MAF files to genome-wide non-coding bed conservation file. (2 species max)**
+**From MAF files to genome-wide non-coding (we are interest in enhancers) bed conservation file. (2 species max)**
 
 ### get conservation files
 
@@ -45,13 +45,12 @@ gg6
 Takes one input file *narrowPeak.bed*, gives two outputfiles: *noTSS.bed* ; *resizedAndMerge_noTSS.bed*
 
 * reformat narrowPeak format to 4 columns bed format
-* get intervals that do not overlap promoters (TSS)
+* get intervals that do not overlap promoters (TSS) (we are interest in enhancers)
 * create new file with resized and merged intervals. *You can choose to give all the peaks the same size, centered on the summit called by macs2. If so, peaks may then overlap. In this case, they are merge in one, larger peak*
 * get intervals that do not overlap promoters AFTER resizing
   
 ### Subtract negative tissue from positive one
 
 *From_noTSS_to_noBrain_mm10.sh*
-
-
+If you phave resized and original macs2 peaks tracks for positive tissues and you want to subtract negative tissue, provide negative tracks for both resized and original macs2 peaks.
 
