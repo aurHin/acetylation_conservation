@@ -6,7 +6,7 @@ Start from macs2 narrowPeak files from ChIP-seq experiment and from conservation
 Here mouse mm10 vs chicken galGal6.
 
 ## Conservation files
-**From MAF file to genomie-wide non-coding bed conservaion file. (2 species)**
+**From MAF files to genome-wide non-coding bed conservation file. (2 species max)**
 
 ### get conservation files
 
@@ -25,7 +25,8 @@ Need to sort the file, use Galaxy *SortBed*. (To later use bedtools or other too
 
     sortBed -i '/slipstream/galaxy/production/data/files/090/dataset_90303.dat'  > '/slipstream/galaxy/production/data/files/090/dataset_90308.dat'
 
-To have non-coding CS, use *bedtools* locally.
+### select Conserved Non-coding Sequences (CNS) from Conserved Sequences (CS)
+To get CNS, use *bedtools* locally.
 
 mm10
   
@@ -34,3 +35,11 @@ mm10
 gg6
 
     bedtools intersect -a /Users/Hintermann/Desktop/LAB/genomicData/genomicData_galGal6/SortBed_on_MAF_to_BED_on_gG6_mm10_galGal6.bed -b /Users/Hintermann/Desktop/LAB/genomicData/genomicData_galGal6/genomeWide_ncbiRefSeq_gg6.bed -v > /Users/Hintermann/Desktop/LAB/genomicData/genomicData_galGal6/SortBed_on_MAF_to_BED_on_gG6_mm10_galGal6_nonCoding.bed 
+
+## macs2narrowPeak files
+
+
+
+
+
+
