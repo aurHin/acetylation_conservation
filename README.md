@@ -62,3 +62,5 @@ If you have both resized and original macs2peak tracks for positive tissues and 
 *peak_OL_CNS.sh*
 
 Takes macs2peak file and return a bed with an additional column which containe "noCSoverlap" or "CSoverlap" for each peak. 1bp overlap is sufficient to qualify the whole peak as CNSoverlap.
+
+*AddConservationColumnTomacs2.R*
