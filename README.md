@@ -94,3 +94,11 @@ Parameters not passed in argument but you can change at beginning of file:
 - colWidth<-0.7
 - pltWidth<-9 #in cm
 - pltHeight<-9 #in cm
+
+To plot all files of a folder, use
+
+    #!/bin/bash
+
+    for i in $(find /Users/Hintermann/Desktop/LAB/ChIP/conservedSeqAndAc_mm_gg_PT_skin/B_PT_WP_Skin_CTCF/H3K27ac_mm10/macs2_toPlot/*.bed); do
+    Rscript /Users/Hintermann/Desktop/LAB/Bioinfo/Plot_acetylation_201907.R "$i" /Users/Hintermann/Desktop/LAB/genomicData/genomicData_mm10/regionsForQuantif_HoxD.bed
+    done
