@@ -88,3 +88,9 @@ If you have both resized and original macs2peak tracks for positive tissues and 
 *Plot_acetylation_201907.R*
 
 Plot coverage of peaks per region [bp] normalised by region size [bp]. Peaks that OL 1 or more bp with CNS are in one color, peaks without OL in another.
+
+Parameters not passed in argument but you can change at beginning of file:
+- y_limit<-0.09
+- colWidth<-0.7
+- pltWidth<-9 #in cm
+- pltHeight<-9 #in cm
