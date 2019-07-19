@@ -1,4 +1,4 @@
-# macs2peaks_conservation
+## macs2peaks_conservation
 
 Compare different tracks of macs2 peaks from ChIP-seq, without or without comparison with sequence conservation.
 
