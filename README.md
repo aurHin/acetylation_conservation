@@ -89,7 +89,7 @@ If you have both resized and original macs2peak tracks for positive tissues and 
 
 Plot coverage of peaks per region [bp] normalised by region size [bp]. Peaks that OL 1 or more bp with CNS are in one color, peaks without OL in another.
 
-Parameters not passed in argument but you can change at beginning of file:
+Parameters not passed as arguments but you can change at beginning of file:
 - y_limit<-0.09
 - colWidth<-0.7
 - pltWidth<-9 #in cm
@@ -102,3 +102,5 @@ To plot all files of a folder, use
     for i in $(find /Users/Hintermann/Desktop/LAB/ChIP/conservedSeqAndAc_mm_gg_PT_skin/B_PT_WP_Skin_CTCF/H3K27ac_mm10/macs2_toPlot/*.bed); do
     Rscript /Users/Hintermann/Desktop/LAB/Bioinfo/Plot_acetylation_201907.R "$i" /Users/Hintermann/Desktop/LAB/genomicData/genomicData_mm10/regionsForQuantif_HoxD.bed
     done
+
+For each input macs2peak file, it creates one bar plot and one table exctracting from the plot the data that is in the plot. This way, it is possible to verify that what is plotted is really corresponding to the data we wanted to plot. It is also possible to quickly quantify other things with this table, like to get the proportion of CSoverlap but numeric.
