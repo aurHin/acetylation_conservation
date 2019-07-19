@@ -71,7 +71,7 @@ If you have both resized and original macs2peak tracks for positive tissues and 
 
 *peak_OL_CNS.sh*
 
-* takes macs2peak file and creat a subset file with only peaks that OL with CNS. 1bp overlap is sufficient to qualify the whole peak as CNSoverlap.
+* takes macs2peak file and creates a subset file with only peaks that OL with CNS. 1bp overlap is sufficient to qualify the whole peak as CNSoverlap. Then, all bp of the OL peak will count in CS_OL, not only the bp that actually OL (because I need a binary system, otherwise it gets too complicated).
 * passes .bed and CS.bed as argumenta in *AddConservationColumnTomacs2.R*. 
 * returns a bed with an additional column which contains "noCSoverlap" or "CSoverlap" for each peak. 
 
