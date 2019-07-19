@@ -36,8 +36,7 @@ gg6
 
     bedtools intersect -a /Users/Hintermann/Desktop/LAB/genomicData/genomicData_galGal6/SortBed_on_MAF_to_BED_on_gG6_mm10_galGal6.bed -b /Users/Hintermann/Desktop/LAB/genomicData/genomicData_galGal6/genomeWide_ncbiRefSeq_gg6.bed -v > /Users/Hintermann/Desktop/LAB/genomicData/genomicData_galGal6/SortBed_on_MAF_to_BED_on_gG6_mm10_galGal6_nonCoding.bed 
 
->chr1	682789	682876	galGal6_52	0	+
-
+>chr1	682789	682876	galGal6_52	0	+ \n
 >chr1	1116484	1116563	galGal6_63	0	+
 
 >chr1	1161041	1161284	galGal6_74	0	+
