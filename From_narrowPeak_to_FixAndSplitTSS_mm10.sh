@@ -33,7 +33,6 @@ bedtools intersect -a "$output_basicname"_resizeAndMerged.bed -b /Users/Hinterma
 
 #Step6 - remove temporary files.
 rm "$output_basicname"_4col.bed
-rm "$output_basicname"_summit.bed
 rm "$output_basicname"_resize.bed
 rm "$output_basicname"_resizeAndMerged.bed
 done
