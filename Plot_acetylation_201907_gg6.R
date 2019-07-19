@@ -2,7 +2,7 @@ library(data.table)
 library(ggplot2)
 library(plyr)
 
-y_limit<-0.2
+y_limit<-0.07
 colWidth<-0.7
 pltWidth<-9 #in cm
 pltHeight<-9 #in cm
@@ -49,8 +49,8 @@ tbl_toPlot$V4<-factor(tbl_toPlot$V4, levels = c("noCNSoverlap","CNSoverlap"))
 
 outdir<-paste0(dirname(arg1),"/plots/")
 dir.create(outdir,showWarnings = F)
-pltName<-gsub(".bed",".png",basename(arg1))
-tblName<-gsub(".bed","_plottedData.bed",basename(arg1))
+pltName<-gsub(".bed",paste0("yaxis",y_limit,"_plottedData.png"),basename(arg1))
+tblName<-gsub(".bed",paste0("yaxis",y_limit,"_plottedData.bed"),basename(arg1))
 
 message("Plotting")
 
