@@ -40,7 +40,9 @@ gg6
 
 ### Prepare peak files
 
-Script *From_narrowPeak_to_FixAndSplitTSS_mm10.sh*:
+Script *From_narrowPeak_to_FixAndSplitTSS_mm10.sh*
+>One input file narrowPeak, two outputfiles: noTSS.bed ; resizedAndMerge_noTSS.bed
+
 * reformat narrowPeak format to 4 columns bed format
 * get intervals that do not overlap promoters (TSS)
   + resize and merge intervals
