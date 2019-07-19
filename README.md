@@ -1,4 +1,4 @@
-# macs2peaks_conservation
+# macs2peaksAndConservation
 
 **Compare different tracks of macs2 peaks from ChIP-seq, without or without comparison with sequence conservation.**
 
@@ -46,7 +46,7 @@ gg6
 
 *Note: galGal_74 is the orthologuous conserved element of mm10_74.
 
-## Preapre macs2narrowPeak files
+## Prepare macs2narrowPeak files
 
 ### Fromat peak files
 
