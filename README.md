@@ -40,15 +40,14 @@ gg6
 
 ### Prepare peak files
 
-Script *From_narrowPeak_to_FixAndSplitTSS_mm10.sh*
->One input file narrowPeak, two outputfiles: noTSS.bed ; resizedAndMerge_noTSS.bed
+*From_narrowPeak_to_FixAndSplitTSS_mm10.sh*
+Takes one input file *narrowPeak.bed*, gives two outputfiles: *noTSS.bed* ; *resizedAndMerge_noTSS.bed*
 
 * reformat narrowPeak format to 4 columns bed format
 * get intervals that do not overlap promoters (TSS)
-  + resize and merge intervals
-  + get intervals that do not overlap promoters AFTER resizing
+* create new file with resized and merged intervals (You can choose to give all the peaks the same size, centered on the summit called by macs2. If so, peaks may then overlap. In this case, they are merge in one, larger peak)
+* get intervals that do not overlap promoters AFTER resizing
   
-You can choose to give all the peaks the same size, centered on the summit called by macs2. If so, peaks may then overlap. In this case, they are merge in one, larger peak. 
 
 
 
