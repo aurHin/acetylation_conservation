@@ -1,9 +1,9 @@
 #!/bin/bash
 
-#GENOME WIDE original macs2 files, narrowPeak format
+# GENOME WIDE original macs2 files, narrowPeak format
 inputFolder="/Users/Hintermann/Desktop/LAB/ChIP/conservedSeqAndAc_mm_gg_PT_skin/B_PT_WP_Skin_CTCF/H3K27ac_gG6/bed4col_resizeAndNoTSS"
 
-#Folder with two output files per input file: noBrain50 ; noBrain150
+# Folder with two output files per input file: noBrain50 ; noBrain150
 outputFolder="bed4colnoTSS_noBrain"
 cd "$inputFolder"
 cd ../
@@ -15,25 +15,25 @@ Brain_resize="/Users/Hintermann/Desktop/LAB/ChIP/conservedSeqAndAc_mm_gg_PT_skin
 
 for i in $(find "$inputFolder"/*eak_res*.bed); do
 
-filename=$(basename -- "$i" .bed)
-output_basicname="$outputFolder"/"$filename"
+  filename=$(basename -- "$i" .bed)
+  output_basicname="${outputFolder}/$filename"
 
-#subtract brain from resize
+  #subtract brain from resize
 
-bedtools intersect -a "$i" -b "$Brain_resize" -v > "$output_basicname"_noBrain.bed
+  bedtools intersect -a "$i" -b "$Brain_resize" -v > "$output_basicname"_noBrain.bed
 
-echo "$output_basicname"_noBrain.bed written
+  echo "$output_basicname"_noBrain.bed written
 
 done
 
 for j in $(find "$inputFolder"/*eak_non*.bed); do
 
-filename=$(basename -- "$j" .bed)
-output_basicname="$outputFolder"/"$filename"
+  filename=$(basename -- "$j" .bed)
+  output_basicname="$outputFolder"/"$filename"
 
-#subtract brain from file
+  #subtract brain from file
 
-bedtools intersect -a "$j" -b "$Brain" -v > "$output_basicname"_noBrain.bed
-echo "$output_basicname"_noBrain.bed written
+  bedtools intersect -a "$j" -b "$Brain" -v > "$output_basicname"_noBrain.bed
+  echo "$output_basicname"_noBrain.bed written
 
 done
