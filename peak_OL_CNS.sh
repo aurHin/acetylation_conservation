@@ -12,11 +12,11 @@ mkdir -p "$outputFolder"
 printf "\n#########\n\nSTART LOOP \n"
 
 for i in $(find *.bed); do
+  filename=$(basename -- "$i" .bed)
+  output_basicname="$outputFolder"/"$filename"
+  bedtools annotate -counts -i "$i" -files "$CNS_file" > "$output_basicname"_annotCNS.bed
 
-  output_basicname="${outputFolder}/$i"_annotCNS.bed
-  bedtools annotate -counts -i "$i" -files "$CNS_file" > "$output_basicname"
-
-  printf "\nNew file saved under:\n$output_basicname\n"
+  printf "\nNew file saved under:\n$output_basicname"_annotCNS.bed"\n"
 
 done
 

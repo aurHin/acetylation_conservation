@@ -1,23 +1,26 @@
 library(data.table)
 library(ggplot2)
 library(plyr)
-
+install.packages("plyr")
 y_limit <- 0.09
 colWidth <- 0.7
 pltWidth <- 9 #in cm
 pltHeight <- 9 #in cm
 
-fileForTesting <- "/Users/Hintermann/Desktop/LAB/ChIP/conservedSeqAndAc_mm_gg_PT_skin/B_PT_WP_Skin_CTCF/H3K27ac_mm10/macs2_toPlot/H3K27ac_WP_E125_macs2narrowPeak_noTSS_nonBrain_sub_ConservationColumns.bed"
-regionsForQuantif <- commandArgs(T)[2]
-regionsDF <- read.table(regionsForQuantif, sep = "\t", stringsAsFactors = T)
+fileForTesting <- "/Users/Hintermann/Desktop/LAB/CompSeqFonc/analyseMacs2_201909/tests/tryPlot/H3K27ac_E125_WP_r1_macs2narrowPeak_resizeAndMerged_nonTSS_negSubtracted_annotCNS.bed"
+regionsForQuantif <- "/Users/Hintermann/Desktop/LAB/genomicData/genomicData_mm10/regionsForQuantif_HoxD.bed"
+ 
 terminal <- "Y"
 
 if (terminal == "Y"){
-  #macs2 peak file
   arg1 <- commandArgs(T)[1]
+  arg2 <- commandArgs(T)[2]
 } else{
   arg1 <- fileForTesting
+  arg2 <- regionsForQuantif
 }
+
+regionsDF <- read.table(regionsForQuantif, sep = "\t", stringsAsFactors = T)
 
 message("\n\n########\n######\nPlot data from file: ")
 print(basename(arg1))
@@ -41,13 +44,14 @@ for (reg in regionsDF$V4){
                      tbl_toPlot$V2 %in% RegInterval &
                      tbl_toPlot$V3 %in% RegInterval] <- reg
   tbl_toPlot$regionLength[tbl_toPlot$xAxis %in% reg] <- RegOfInt$V3 - RegOfInt$V2
+  tbl_toPlot$V4[tbl_toPlot$V4>0]<-1
 }
 
 #message(paste0("Keep only elements  with start and end included regions coordinates.\nNumber of peaks analyzed: ",))
 tbl_toPlot <- tbl_toPlot[tbl_toPlot$xAxis %in% regionsDF$V4, ]
 print(head(tbl_toPlot))
 #print(dim(tbl_toPlot)[1])
-tbl_toPlot$V4 <- factor(tbl_toPlot$V4, levels = c("noCSoverlap","CSoverlap"))
+tbl_toPlot$V4 <- factor(tbl_toPlot$V4, levels = c(0,1))
 #print(head(tbl_toPlot))
 
 outdir <- paste0(dirname(arg1), "/plots/")
@@ -57,26 +61,8 @@ tblName<-gsub(".bed", "_plottedData.bed", basename(arg1))
 
 message("Plotting")
 # Initialise peakSize
-peakSize <- "IDontKnow"
-if (grepl("resize", pltName)){
-  peakSize <- "resized peaks"
-} else {
-  peakSize <- "original peaks"
-}
-# Initialise tissue
-tissue <- "IDontKnow"
-if (grepl("PT", pltName)){
-  tissue <- "PT"
-}
-if (grepl("WP", pltName)){
-  tissue <- "WP"
-}
-if (grepl("noBrain150",pltName)){
-  brainNb <- "Brain150"
-} else {
-  brainNb <- "Brain50"
-}
-labsTitle<-paste0("macs2 H3K27ac\n",peakSize,"\n",tissue," minus ",brainNb)
+
+#labsTitle<-strsplit(pltName,"macs")[[1]][1]
 
 plt <- ggplot(tbl_toPlot, 
               aes(x = xAxis, y = (V3 - V2) / regionLength,

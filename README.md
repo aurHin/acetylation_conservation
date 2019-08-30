@@ -59,10 +59,11 @@ To directly use te MACS2 callpeak tool, take MAPQ30 filter mapping bam, not the 
 
 Takes one input file *narrowPeak.bed*, gives two outputfiles: *noTSS.bed* ; *resizedAndMerge_noTSS.bed*
 
-* reformat narrowPeak format to 4 columns bed format
-* get intervals that do not overlap promoters (TSS) (we are interest in enhancers)
-* create a new file with resized and merged intervals. *You can choose to give all the peaks the same size, centered on the summit called by macs2. If so, peaks may then overlap. In this case, they are merge in one, larger peak*
+* resize narrowPeak to 2 kb (1kb on each side of the summit)
+* merge intervals that overlap due to resizing 
 * get intervals that do not overlap promoters AFTER resizing
+
+note: the output is a bed file with only 3 columns after resize and merge
   
 ### Subtract negative tissue from positive one
 note: if you mixed different AB ChIP and/or resized and not resized, you have to separate these different conditions in folders with positive tissues and one negative tissue to subtract from positive ones.
@@ -78,17 +79,7 @@ If you have both resized and original macs2peak tracks for positive tissues and 
 *peak_OL_CNS.sh*
 Provide a folder grouping all your macsPeak files.
 
-* creates a subset file with macs2peaks that overlap (OL) Conserved Non-Coding Sequences (CNS). 1bp overlap is sufficient to qualify the whole peak as CNSoverlap. When a peak qualified as overlapping CNS, all bp of this peak will count in CS_OL, not only the bp that actually overlap. The reason is that I need a binary system, otherwise it gets too complicated.
-* passes .bed and CS.bed as argument in *AddConservationColumnTomacs2.R*. 
-* returns a bed with an additional column which contains "noCSoverlap" or "CSoverlap" for each peak. 
-
->chr1	4598797	4599054	MACS2_peak_14	noCSoverlap
-
->chr1	4613913	4614257	MACS2_peak_15	noCSoverlap
-
->chr1	4622998	4623355	MACS2_peak_16	CSoverlap
-
->chr1	4640279	4641967	MACS2_peak_17	noCSoverlap
+* The number of CNS overlapping with each peak is reported in a fourth column of each peak bed provided.
 
 ### Plot macs2peaks
 
@@ -110,5 +101,5 @@ To plot all files of a folder, use
     Rscript /Users/Hintermann/Desktop/LAB/Bioinfo/Plot_acetylation_201907.R "$i" /Users/Hintermann/Desktop/LAB/genomicData/genomicData_mm10/regionsForQuantif_HoxD.bed
     done
 
-For each input macs2peak file, it creates one bar plot and one table exctracting from the plot the data that is in the plot. This way, it is possible to verify that what is plotted is really corresponding to the data we wanted to plot. It is also possible to quickly quantify other things with this table, like to get the proportion of CSoverlap but numeric.
+For each input macs2peak file, it creates one bar plot and one table extracting from the plot the data that is in the plot. This way, it is possible to verify that what is plotted is really corresponding to the data we wanted to plot. It is also possible to quickly quantify other things with this table, like to get the proportion of CSoverlap but numeric.
 

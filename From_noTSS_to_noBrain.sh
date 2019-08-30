@@ -12,6 +12,7 @@ outputFolder="$inputFolder"_negSubtracted
 cd "$inputFolder"
 cd ../
 mkdir -p "$outputFolder"
+printf "\n#########\n\nSubtraction of $2 data from the other files of the folder. \n"
 
 printf "\n#########\n\nSTART LOOP \n"
 

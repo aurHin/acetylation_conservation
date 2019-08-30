@@ -35,3 +35,4 @@ macs2ToOL:
 	H3K27ac_HH35_Skin_r2_macs2narrowPeak_resizeAndMerged_nonTSS_negSubtracted.bed
 
 ./peak_OL_CNS.sh /Users/Hintermann/Desktop/LAB/CompSeqFonc/analyseMacs2_201909/gg/macs2ToOL /Users/Hintermann/Desktop/LAB/CompSeqFonc/analyseMacs2_201909/gg/CNS_gG6vsmm10_galGal6_NCIB.bed 
+
