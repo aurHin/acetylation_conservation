@@ -15,7 +15,10 @@ cd "$inputFolder"
 cd ..
 mkdir -p "$outputFolder"
 
+printf "\n#########\n\nSTART LOOP \n"
+
 for i in $(find "$inputFolder"/*.bed); do
+
   filename=$(basename -- "$i" .bed)
   output_basicname="${outputFolder}/$filename"
 
@@ -25,21 +28,26 @@ for i in $(find "$inputFolder"/*.bed); do
   # cat "$i" | cut -f 1-4 > "$output_basicname"_4col.bed
 
   # Step2 - get intervals that do not overlap promoters.
-  bedtools intersect -a "$output_basicname"_4col.bed -b "TSSbed" -v > "$output_basicname"_nonTSS.bed
+  bedtools intersect -a "$output_basicname"_4col.bed -b "$TSSbed" -v > "$output_basicname"_nonTSS.bed
 
   # Step3 - center on summit. Change start and end to summit coordinates.
   awk -F $'\t' 'BEGIN {OFS = FS} {{print $1,$2+$10,$2+$10,$4}}' "$i" > "$output_basicname"_summit.bed
 
   # Step4 - resize and merge intervals. Advantage to use slop from bedtools, you do not get negative values.
-  bedtools slop -i "$output_basicname"_summit.bed -g  -b 1000 > "$output_basicname"_resize.bed
+  bedtools slop -i "$output_basicname"_summit.bed -g "$chromSizes" -b 1000 > "$output_basicname"_resize.bed
   bedtools merge -i "$output_basicname"_resize.bed > "$output_basicname"_resizeAndMerged.bed
 
   # Step5 - get intervals that do not overlap promoters AFTER resizing.
-  bedtools intersect -a "$output_basicname"_resizeAndMerged.bed -b "TSSbed" -v > "$output_basicname"_resizeAndMerged_nonTSS.bed
+  bedtools intersect -a "$output_basicname"_resizeAndMerged.bed -b "$TSSbed" -v > "$output_basicname"_resizeAndMerged_nonTSS.bed
 
   # Step6 - remove temporary files.
-  rm "$output_basicname"_4col.bed
+  
   rm "$output_basicname"_summit.bed
   rm "$output_basicname"_resize.bed
   rm "$output_basicname"_resizeAndMerged.bed
+  
+  printf "\nNew files saved under:\n$output_basicname"_nonTSS.bed"and\n$output_basicname"_resizeAndMerged_nonTSS.bed"\n"
+
 done
+
+printf "\nFINISH LOOP\n\n#########\n\n"

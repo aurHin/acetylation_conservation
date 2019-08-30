@@ -47,25 +47,27 @@ gg6
 ## Prepare macs2narrowPeak files
 
 **Compare different tracks of macs2 peaks from ChIP-seq, without or without comparison with sequence conservation.**
-Verify that your different data set shave a comparable nunber of reads. If it is not the case, subset the ones having more reads with samtools view. (Use unige Baobab)
+Verify that your different data sets have a comparable nunber of reads. If it is not the case, subset the ones having more reads with samtools view. (Use unige Baobab)
+To directly use te MACS2 callpeak tool, take MAPQ30 filter mapping bam, not the mapping bam, otherwise you have to repeat filtering. 
+
     samtools view -s 0.25 -b CTCF_E105_PT_rep1_MAPQ30.bam > CTCF_E105_PT_rep1_mapping_025.bam
 
-To directly use te MACS2 callpeak tool, take MAPQ30 filter mapping bam, not the mapping bam, otherwise you have to repeat filtering. 
 
 ### Format peak files
 
-*From_narrowPeak_to_FixAndSplitTSS_mm10.sh*
+*From_narrowPeak_to_FixAndSplitTSS.sh*
 
 Takes one input file *narrowPeak.bed*, gives two outputfiles: *noTSS.bed* ; *resizedAndMerge_noTSS.bed*
 
 * reformat narrowPeak format to 4 columns bed format
 * get intervals that do not overlap promoters (TSS) (we are interest in enhancers)
-* create new file with resized and merged intervals. *You can choose to give all the peaks the same size, centered on the summit called by macs2. If so, peaks may then overlap. In this case, they are merge in one, larger peak*
+* create a new file with resized and merged intervals. *You can choose to give all the peaks the same size, centered on the summit called by macs2. If so, peaks may then overlap. In this case, they are merge in one, larger peak*
 * get intervals that do not overlap promoters AFTER resizing
   
 ### Subtract negative tissue from positive one
+note: if you mixed different AB ChIP and/or resized and not resized, you have to separate these different conditions in folders with positive tissues and one negative tissue to subtract from positive ones.
 
-*From_noTSS_to_noBrain_mm10.sh*
+*From_noTSS_to_noBrain.sh*
 
 If you have both resized and original macs2peak tracks for positive tissues and you want to subtract negative tissue, provide negative tracks for both resized and original macs2peaks.
 
@@ -74,9 +76,10 @@ If you have both resized and original macs2peak tracks for positive tissues and 
 ### Find which macs2peaks overlap with CNS
 
 *peak_OL_CNS.sh*
+Provide a folder grouping all your macsPeak files.
 
-* takes macs2peak file and creates a subset file with only peaks that OL with CNS. 1bp overlap is sufficient to qualify the whole peak as CNSoverlap. Then, all bp of the OL peak will count in CS_OL, not only the bp that actually OL (because I need a binary system, otherwise it gets too complicated).
-* passes .bed and CS.bed as argumenta in *AddConservationColumnTomacs2.R*. 
+* creates a subset file with macs2peaks that overlap (OL) Conserved Non-Coding Sequences (CNS). 1bp overlap is sufficient to qualify the whole peak as CNSoverlap. When a peak qualified as overlapping CNS, all bp of this peak will count in CS_OL, not only the bp that actually overlap. The reason is that I need a binary system, otherwise it gets too complicated.
+* passes .bed and CS.bed as argument in *AddConservationColumnTomacs2.R*. 
 * returns a bed with an additional column which contains "noCSoverlap" or "CSoverlap" for each peak. 
 
 >chr1	4598797	4599054	MACS2_peak_14	noCSoverlap
