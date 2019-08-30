@@ -1,11 +1,7 @@
 # macs2peaksAndConservation
-
-**Compare different tracks of macs2 peaks from ChIP-seq, without or without comparison with sequence conservation.**
-Verify that your different data set shave a comparable nunber of reads. If it is not the case, subset the ones having more reads with samtools view. (Use unige Baobab)
-    samtools view -s 0.25 -b CTCF_E105_PT_rep1_mapping.bam > CTCF_E105_PT_rep1_mapping_025.bam
-    
-Start from macs2 narrowPeak files from ChIP-seq experiment and from conservation files which are bed adapted from MAF.
-Here mouse mm10 vs chicken galGal6.
+Input files:
+- conservation bed files (adapted from MAF). Here mouse mm10 vs chicken galGal6. See *Prepare conservation files*
+- macs2 narrowPeak files from ChIP-seq experiment. See *Prepare macs2narrowPeak files* 
 
 ## Prepare conservation files
 **From MAF files to genome-wide non-coding (we are interest in enhancers) bed conservation file. (2 species max)**
@@ -50,7 +46,13 @@ gg6
 
 ## Prepare macs2narrowPeak files
 
-### Fromat peak files
+**Compare different tracks of macs2 peaks from ChIP-seq, without or without comparison with sequence conservation.**
+Verify that your different data set shave a comparable nunber of reads. If it is not the case, subset the ones having more reads with samtools view. (Use unige Baobab)
+    samtools view -s 0.25 -b CTCF_E105_PT_rep1_MAPQ30.bam > CTCF_E105_PT_rep1_mapping_025.bam
+
+To directly use te MACS2 callpeak tool, take MAPQ30 filter mapping bam, not the mapping bam, otherwise you have to repeat filtering. 
+
+### Format peak files
 
 *From_narrowPeak_to_FixAndSplitTSS_mm10.sh*
 
