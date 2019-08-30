@@ -1,8 +1,9 @@
 # macs2peaksAndConservation
 
 **Compare different tracks of macs2 peaks from ChIP-seq, without or without comparison with sequence conservation.**
-Verify that your different data set shave a comparable nunber of reads. If it is not the case, subset the ones having more reads with samtools view.
-
+Verify that your different data set shave a comparable nunber of reads. If it is not the case, subset the ones having more reads with samtools view. (Use unige Baobab)
+    samtools view -s 0.25 -b CTCF_E105_PT_rep1_mapping.bam > CTCF_E105_PT_rep1_mapping_025.bam
+    
 Start from macs2 narrowPeak files from ChIP-seq experiment and from conservation files which are bed adapted from MAF.
 Here mouse mm10 vs chicken galGal6.
 
