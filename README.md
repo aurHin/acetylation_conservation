@@ -99,4 +99,4 @@ To plot all files of a folder, use
 For each input macs2peak file, it creates one bar plot and one table extracting from the plot the data that is in the plot. This way, it is possible to verify that what is plotted is really corresponding to the data we wanted to plot. It is also possible to quickly quantify other things with this table, like to get the proportion of CSoverlap but numeric.
 
 
-This is a test
+This is a test bla
